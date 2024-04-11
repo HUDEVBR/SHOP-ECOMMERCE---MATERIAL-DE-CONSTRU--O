@@ -7,12 +7,13 @@ import Cart from "./pages/Cart";
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Navigate,
 } from "react-router-dom";
 
 
 const App = () => {
-  
+  const user = true
   return (
     <Router>
       <Routes>
@@ -24,9 +25,9 @@ const App = () => {
         </Route>
         <Route path= '/cart' element={<Cart/>}>
         </Route>
-        <Route path= '/login' element={<Login/>}>
+        <Route path='/login' element={user ? <Navigate to ='/' /> : <Login/>}>
         </Route>
-        <Route path= '/register' element={<Register/>}>
+        <Route path='/register' element={user ? <Navigate to ='/' /> : <Register/>}>
         </Route>
       </Routes>
     </Router>

@@ -4,21 +4,21 @@ export const sliderItems = [
         img: "/images/ge_disjuntor_01.png" ,
         title: "DISJUNTORES",
         desc: "Disjuntor para chuveiro elétrico, fiação de casas e apartamentos e demais eletrodomésticos",
-        bg: "#2e3092",
+        bg: "#2e3092"
     },
     {
         id: 2,
         img: "/images/cobrecon_cabo_flexivel_01.png",
         title: "CABOS",
         desc: "Cabos de todo tipo de milímetro para sua residência ou comércio",
-        bg: "#FDE2F0",
+        bg: "#FDE2F0"
     },
     {
         id: 3,
         img: "/images/lorenzetti_ducha_03.png",
         title: "CHUVEIROS",
         desc: "Diversas marcas e modelos de chuveiros Lorezentti",
-        bg: "#FCE5DC",
+        bg: "#FCE5DC"
     },
 ];
 
@@ -27,16 +27,19 @@ export const categories = [
         id: 1,
         img: "/images/ge_disjuntor_01.png",
         title: "DISJUNTORES",
+        cat: 'disjuntores'
     },
     {
         id: 2,
         img: "/images/cobrecon_cabo_flexivel_01.png",
         title: "CABOS",
+        cat: 'cabos'
     },
     {
         id: 3,
         img: "/images/lorenzetti_ducha_03.png",
         title: "CHUVEIROS",
+        cat: 'chuveiros'
     },
 ];
 
@@ -242,5 +245,3 @@ export const popularProducts = [
         img: "/images/taschibra_luminaria_03.png",
     },
 ];
-
-
