@@ -27,19 +27,19 @@ export const categories = [
         id: 1,
         img: "/images/ge_disjuntor_01.png",
         title: "DISJUNTORES",
-        cat: 'disjuntores'
+        cat: 'Disjuntores'
     },
     {
         id: 2,
         img: "/images/cobrecon_cabo_flexivel_01.png",
         title: "CABOS",
-        cat: 'cabos'
+        cat: 'Cabos'
     },
     {
         id: 3,
         img: "/images/lorenzetti_ducha_03.png",
         title: "CHUVEIROS",
-        cat: 'chuveiros'
+        cat: 'Chuveiros'
     },
 ];
 
