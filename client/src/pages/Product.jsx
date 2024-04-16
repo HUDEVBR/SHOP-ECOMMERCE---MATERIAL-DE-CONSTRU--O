@@ -5,6 +5,9 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { Add, Remove } from "@material-ui/icons";
 import { mobile } from "../responsive";
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { publicRequest } from "../requestMethod";
 
 const Container = styled.div``;
 
@@ -127,22 +130,39 @@ const Button = styled.button`
 
 
 const Product = () => {
+    const location = useLocation();
+    const id = location.pathname.split('/')[2];
+    const [product, setProduct] = useState({});
+
+    useEffect(() => {
+        const getProduct = async () => {
+            try {
+                const res = await publicRequest.get('/products/find/' + id)
+                setProduct(res.data)
+            } catch (error) {
+                
+            }
+        };
+        getProduct()
+    },[id])
+
   return (
       <Container>
           <Navbar />
           <Announcement />
           <Wrapper>
               <ImgContainer>
-                  <Image src="/images/taschibra_luminaria_01.png" />
+                  <Image src={product.img} />
               </ImgContainer>
               <InfoContainer>
-                  <Title>Produto</Title>
-                  <Desc>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium eaque iure atque? Hic vitae voluptatibus maiores exercitationem cumque odit quisquam officiis harum eius. Rerum vero corrupti debitis ea facilis quidem!</Desc>
-                  <Price>R$ 50,00</Price>
+                  <Title>{product.title}</Title>
+                  <Desc>{product.desc}</Desc>
+                  <Price>R$ {product.price}</Price>
                   <FilterContainer>
                   <Filter>
                           <FilterTitle>Marca:</FilterTitle>
                           <FilterBrandTypes>
+                              
                                     <FilterBrand value="default"></FilterBrand>
                                     <FilterBrand value="0">3M</FilterBrand>
                                     <FilterBrand value="1">G.E. General Eletrics</FilterBrand>
