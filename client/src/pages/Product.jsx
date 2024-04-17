@@ -8,6 +8,7 @@ import { mobile } from "../responsive";
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethod";
+import axios from "axios";
 
 const Container = styled.div``;
 
@@ -69,7 +70,7 @@ const FilterTitle = styled.span`
     ${mobile({padding: "0 10px"})}
 `;
 
-const FilterBrandTypes = styled.select`
+const FilterBrandTypes = styled.span`
 `;
 
 const FilterBrand = styled.option`
@@ -133,6 +134,8 @@ const Product = () => {
     const location = useLocation();
     const id = location.pathname.split('/')[2];
     const [product, setProduct] = useState({});
+    const [quantity, setQuantity] = useState(1);
+    const [brand, setBrand] = useState('');
 
     useEffect(() => {
         const getProduct = async () => {
@@ -144,7 +147,20 @@ const Product = () => {
             }
         };
         getProduct()
-    },[id])
+    }, [id]);
+
+    const handleQuantity = (type) => {
+        if (type === 'dec') {
+            quantity > 1 && setQuantity(quantity - 1);
+        } else {
+            setQuantity(quantity + 1)
+        }
+    }
+
+    const handleClick = () => {
+        //atualizar o carrinho
+        axios.post
+    }
 
   return (
       <Container>
@@ -161,10 +177,11 @@ const Product = () => {
                   <FilterContainer>
                   <Filter>
                           <FilterTitle>Marca:</FilterTitle>
-                          <FilterBrandTypes>
-                              
-                                    <FilterBrand value="default"></FilterBrand>
-                                    <FilterBrand value="0">3M</FilterBrand>
+                          <FilterBrandTypes onChange={(e) => setBrand(e.target.value)}>
+                              {product.brand?.map((m) => (
+                                  <FilterBrand key={m}>{ m}</FilterBrand>
+                              ))}
+                                    {/* <FilterBrand value="0">3M</FilterBrand>
                                     <FilterBrand value="1">G.E. General Eletrics</FilterBrand>
                                     <FilterBrand value="2">Cobrecon</FilterBrand>
                                     <FilterBrand value="3">Lorenzetti</FilterBrand>
@@ -173,26 +190,29 @@ const Product = () => {
                                     <FilterBrand value="6">Papaiz</FilterBrand>
                                     <FilterBrand value="7">Starret</FilterBrand>
                                     <FilterBrand value="8">Taschibra</FilterBrand>
-                                    <FilterBrand value="9">Imperial</FilterBrand>
+                                    <FilterBrand value="9">Imperial</FilterBrand> */}
                                 </FilterBrandTypes>
                   </Filter>
-                  <Filter>
+                  {/* <Filter>
                       <FilterTitle >Preços:</FilterTitle>    
                           <FilterValues>
-                            <FilterPrice>Até R$ 50</FilterPrice>
+                              {product?.value?.map((v) => (
+                                  <FilterPrice key={v}>{v}</FilterPrice>
+                              ))}
+                            <FilterPrice>R$ 0,00 Até R$ 50</FilterPrice>
                             <FilterPrice>De R$ 51 Até R$ 100</FilterPrice>
                             <FilterPrice>De R$ 101 Até R$ 200</FilterPrice>
                             <FilterPrice>Mais de R$ 201</FilterPrice>
                         </FilterValues>
-                  </Filter>
+                  </Filter> */}
                   </FilterContainer>
                   <AddContainer>
                       <AmountContainer>
-                          <Remove />
-                          <Amount>1</Amount>
-                          <Add/>
+                          <Remove onClick={() => handleQuantity('dec')} />
+                          <Amount>{quantity}</Amount>
+                          <Add onClick={() => handleQuantity('inc')}/>
                       </AmountContainer>
-                      <Button>ADICIONAR AO CARRINHO</Button>
+                      <Button onClick={handleClick}>ADICIONAR AO CARRINHO</Button>
                   </AddContainer>
               </InfoContainer>
           </Wrapper>
