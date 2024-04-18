@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import Footer from '../components/Footer';
 import { Add, Remove } from '@material-ui/icons';
 import { mobile } from '../responsive';
+import { useSelector } from 'react-redux';
+
 
 const Container = styled.div``;
 
@@ -79,12 +81,9 @@ const ProductName = styled.span``;
 
 const ProductId = styled.span``;
 
-const ProductColor = styled.span`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${(props) => props.color};
-`;
+const ProductBrand = styled.span``;
+
+const ProductSize = styled.span``;
 
 const PriceDetail = styled.span`
     flex: 1;
@@ -138,7 +137,6 @@ const SummaryItem = styled.div`
     font-size: ${props => props.type === "total" && "24px"};
 `;
 
-
 const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
 
@@ -152,6 +150,7 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+    const cart = useSelector(state=> state.cart)
   return (
     <div>
         <Container>
@@ -160,8 +159,9 @@ const Cart = () => {
               <Wrapper>
                   <Title>LAMPADAS</Title>
                   <Top>
-                      
+                       
                       <TopButton>CONTINUAR COMPRANDO</TopButton>
+                      
                       <TopTexts>
                           <TopText>Lampadas (2)</TopText>
                           <TopText>Itens desejados (0)</TopText>
@@ -170,49 +170,34 @@ const Cart = () => {
                   </Top>
                   <Bottom>
                       <Info>
-                          <Product>
+                          {cart.products.map((product) => ( 
+                              < Product >
                               <ProductDetail>
-                                  <Image src="./images/taschibra_luminaria_01.png"/>
+                                      <Image src={product.img} />
                                   <Details>
-                                      <ProductName><b>Produto:</b> Luminaria Taschibra </ProductName>
-                                      <ProductId><b>ID:</b> 002</ProductId>
-                                      <ProductColor color="black"/>
+                                      <ProductName><b>Produto:</b> {product.title} </ProductName>
+                                      <ProductId><b>ID:</b> {product._id }</ProductId>
+                                          <ProductBrand> <b>Marca:</b> {product.brand} </ProductBrand>
+                                          <ProductSize><b>Tamanho:</b> {product.size}</ProductSize>
                                   </Details>
                               </ProductDetail>
                               <PriceDetail>
                                   <ProductAmountContainer>
                                       <Add />
-                                      <ProductAmount>2</ProductAmount>
+                                          <ProductAmount>{product.quantity}</ProductAmount>
                                       <Remove/>
                                   </ProductAmountContainer>
-                                  <ProductPrice>R$ 30</ProductPrice>
+                                      <ProductPrice>R$ {product.price * product.quantity}</ProductPrice>
                               </PriceDetail>
                           </Product>
-                          <Hr/>
-                          <Product>
-                              <ProductDetail>
-                                  <Image src="./images/starret_broca_01.png"/>
-                                  <Details>
-                                      <ProductName><b>Produto:</b> Broca Starret </ProductName>
-                                      <ProductId><b>ID:</b> 002</ProductId>
-                                      <ProductColor color="black"/>
-                                  </Details>
-                              </ProductDetail>
-                              <PriceDetail>
-                                  <ProductAmountContainer>
-                                      <Add />
-                                      <ProductAmount>1</ProductAmount>
-                                      <Remove/>
-                                  </ProductAmountContainer>
-                                  <ProductPrice>R$ 20</ProductPrice>
-                              </PriceDetail>
-                          </Product>
+                        ))}
+                        < Hr />
                       </Info>
                       <Summary>
                           <SummaryTitle>RESUMO DE PEDIDOS</SummaryTitle>
                           <SummaryItem>
                               <SummaryItemText>Subtotal</SummaryItemText>
-                              <SummaryItemPrice>R$ 50</SummaryItemPrice>
+                              <SummaryItemPrice>R$ {cart.total}</SummaryItemPrice>
                           </SummaryItem>
                           <SummaryItem>
                               <SummaryItemText>Frete</SummaryItemText>
@@ -224,7 +209,7 @@ const Cart = () => {
                           </SummaryItem>
                           <SummaryItem type="total">
                               <SummaryItemText>Total</SummaryItemText>
-                              <SummaryItemPrice>R$ 56</SummaryItemPrice>
+                              <SummaryItemPrice>R$ {cart.total + 10 - 4}</SummaryItemPrice>
                           </SummaryItem>
                           <Button>FINALIZAR COMPRA</Button>
                       </Summary>

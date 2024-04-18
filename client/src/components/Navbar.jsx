@@ -3,6 +3,9 @@ import { Search, ShoppingCartOutlined } from '@material-ui/icons'
 import React from 'react'
 import styled from 'styled-components'
 import { mobile } from '../responsive';
+import { useSelector } from 'react-redux'
+import {Link} from 'react-router-dom'
+
 
 const Container = styled.div`
     height: 60px;
@@ -68,10 +71,12 @@ const MenuItem = styled.div`
     font-size: 14px;
     cursor: pointer;
     margin-left: 25px;
-    ${mobile({ fontSize: "10px", marginLeft: "10px", fontWeight: "600" })}
+    ${mobile({ fontSize: "10px", marginLeft: "10px", fontWeight: "600" })}  
 `
 
 const Navbar = () => {
+    const quantity = useSelector(state => state.cart.quantity)
+    
   return (
       <Container>
           <Wrapper>
@@ -82,13 +87,17 @@ const Navbar = () => {
                       <Search style={{color:"gray", fontSize:16}} />
                   </SearchContainer>
               </Left>
+              <Link to='/'>
               <Center><Logo >J F MATERIAIS.</Logo></Center>
+              </Link>
               <Right>
                   <MenuItem>REGISTRAR</MenuItem>
                   <MenuItem>LOGAR</MenuItem>
-                  <MenuItem>
-                    <Badge badgeContent={4} color="primary"> <ShoppingCartOutlined/></Badge>
-                  </MenuItem>
+                  <Link to='/cart'>
+                    <MenuItem>
+                        <Badge badgeContent={quantity} color="primary" overlap='rectangular'> <ShoppingCartOutlined/></Badge>
+                    </MenuItem>
+                  </Link>
               </Right>
           </Wrapper>
       </Container>

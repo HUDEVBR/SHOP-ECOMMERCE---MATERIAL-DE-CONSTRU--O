@@ -8,7 +8,9 @@ import { mobile } from "../responsive";
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethod";
-import axios from "axios";
+import { addProduct } from '../redux/cartRedux'
+import { useDispatch } from "react-redux";
+
 
 const Container = styled.div``;
 
@@ -136,6 +138,7 @@ const Product = () => {
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [brand, setBrand] = useState('');
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const getProduct = async () => {
@@ -159,8 +162,9 @@ const Product = () => {
 
     const handleClick = () => {
         //atualizar o carrinho
-        axios.post
-    }
+        dispatch(
+            addProduct({ ...product, quantity, brand }));
+        };
 
   return (
       <Container>
