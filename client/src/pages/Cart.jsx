@@ -1,12 +1,14 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import Announcement from '../components/Announcement'
-import styled from 'styled-components'
-import Footer from '../components/Footer';
 import { Add, Remove } from '@material-ui/icons';
-import { mobile } from '../responsive';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components'
+import Announcement from '../components/Announcement'
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar'
+import { mobile } from '../responsive';
+import StripeCheckout from 'react-stripe-checkout';
+import { useState } from 'react';
 
+const KEY = process.env.REACT_APP_STRIPE
 
 const Container = styled.div``;
 
@@ -150,7 +152,15 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
-    const cart = useSelector(state=> state.cart)
+    const cart = useSelector(state => state.cart);
+    const [stripeToken, setStripeToken] = useState(null);
+
+    const onToken = (token) => {
+        setStripeToken(token)
+    }
+
+    console.log(stripeToken)
+
   return (
     <div>
         <Container>
@@ -211,7 +221,18 @@ const Cart = () => {
                               <SummaryItemText>Total</SummaryItemText>
                               <SummaryItemPrice>R$ {cart.total + 10 - 4}</SummaryItemPrice>
                           </SummaryItem>
+                          <StripeCheckout
+                              name='JF MAT CONST'
+                              image=''
+                              billingAddress
+                              shippingAddress
+                              description={`O total é de ${cart.total}`}
+                              amount={cart.total * 100}
+                              token={onToken}
+                              stripeKey={KEY}
+                          >
                           <Button>FINALIZAR COMPRA</Button>
+                          </StripeCheckout>
                       </Summary>
                   </Bottom>
               </Wrapper>
