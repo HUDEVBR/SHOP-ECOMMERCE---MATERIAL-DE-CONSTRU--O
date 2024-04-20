@@ -221,6 +221,7 @@ const Cart = () => {
                               <SummaryItemText>Total</SummaryItemText>
                               <SummaryItemPrice>R$ {cart.total + 10 - 4}</SummaryItemPrice>
                           </SummaryItem>
+                          {/*Método de checkout da compra*/ }
                           <StripeCheckout
                               name='JF MAT CONST'
                               image=''
