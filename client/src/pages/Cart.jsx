@@ -6,7 +6,8 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar'
 import { mobile } from '../responsive';
 import StripeCheckout from 'react-stripe-checkout';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import {userRequest} from '../requestMethod'
 
 const KEY = process.env.REACT_APP_STRIPE
 
@@ -159,8 +160,19 @@ const Cart = () => {
         setStripeToken(token)
     }
 
-    console.log(stripeToken)
-
+    useEffect(() => {
+        const makeRequest = async () => {
+          try {
+              const res = await userRequest('/checkout/payment', {
+                  tokenId: stripeToken,
+                  amount: cart.total * 100,
+                  
+            })
+          } catch (error) {
+            
+          }
+      }
+  },[stripeToken])
   return (
     <div>
         <Container>
