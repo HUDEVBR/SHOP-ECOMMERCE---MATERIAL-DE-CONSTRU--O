@@ -241,7 +241,7 @@ const Cart = () => {
                           {/*Método de checkout da compra no Stripe*/ }
                           <StripeCheckout
                               name='JF MAT CONST'
-                              image=''
+                              image ='../assets/images/ícone.png'
                               billingAddress
                               shippingAddress
                               currency='BRL'
