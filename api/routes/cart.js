@@ -1,5 +1,9 @@
 const Cart = require("../models/Cart");
-const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("./verifyToken");
+const {
+    verifyToken,
+    verifyTokenAndAuthorization,
+    verifyTokenAndAdmin,
+} = require("./verifyToken");
 
 const router = require("express").Router();
 
@@ -17,7 +21,6 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //UPDATE - Função para atualizar carrinho
-
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
         const updatedCart = await Cart.findByIdAndUpdate(
@@ -34,18 +37,16 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
 });
 
 //DELETE - Função para deletar produtos
-
 router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
         await Cart.findByIdAndDelete(req.params.id);
-        res.status(200).json("Cart has been deleted...")
+        res.status(200).json("Carrinho foi deletado...")
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
 //GET USER CART - Função para lista produto específico
-
 router.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
         const cart = await Cart.findOne({id: req.params.userId});
@@ -64,6 +65,6 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-})
+});
 
 module.exports = router;

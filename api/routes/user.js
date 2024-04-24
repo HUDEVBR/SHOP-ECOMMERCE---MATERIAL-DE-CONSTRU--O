@@ -1,10 +1,13 @@
 const User = require("../models/User");
-const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("./verifyToken");
+const {
+    verifyToken,
+    verifyTokenAndAuthorization,
+    verifyTokenAndAdmin
+} = require("./verifyToken");
 
 const router = require("express").Router();
 
-//UPDATE - Função para atualizar produtos
-
+//UPDATE - Função para atualizar dados do usuário pelo id
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     if (req.body.password) {
         req.body.password = CryptoJS.AES.encrypt(
@@ -27,19 +30,17 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     }
 });
 
-//DELETE - Função para deletar produtos
-
+//DELETE - Função para deletar usuários pelo id
 router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id)
-        res.status(200).json("User has been deleted...")
+        res.status(200).json("Usuário foi deletado...")
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
 //GET USER - Função para listar usuário de acordo com o token
-
 router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
@@ -50,15 +51,14 @@ router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-//GET ALL USERS - Função para listar todos os usuários
-
+//GET ALL USER - Função para listar todos os usuários
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
-    const query = req.query.new
+    const query = req.query.new;
     try {
-        const user = query
+        const users = query
             ? await User.find().sort({ _id: -1 }).limit(5)
             : await User.find();
-        res.status(200).json(user);
+        res.status(200).json(users);
     } catch (err) {
         res.status(500).json(err);
     }

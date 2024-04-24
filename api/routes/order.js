@@ -20,8 +20,7 @@ router.post("/", verifyToken, async (req, res) => {
     }
 });
 
-//UPDATE - Função para atualizar produtos
-
+//UPDATE - Função para atualizar pedido por id do usuário
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
         const updatedOrder = await Order.findByIdAndUpdate(
@@ -37,8 +36,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-//DELETE - Função para deletar produtos
-
+//DELETE - Função para deletar pedidos por id do usuário
 router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
         await Order.findByIdAndDelete(req.params.id);
@@ -48,9 +46,8 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-//GET USER ORDERS - Função para lista produto específico
-
-router.get("/find/:userId", async (req, res) => {
+//GET USER ORDERS - Função para listar pedidos por id do usuário
+router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     try {
         const orders = await Order.find({userId: req.params.userId});
         res.status(200).json(orders);
@@ -81,10 +78,9 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
         const income = await Order.aggregate([
             { $match: { createdAt: { $gte: previousMonth } } },
             {
-                $project:
-                {
+                $project:{
                     month: { $month: "$createdAt" },
-                    sales: "$amount"
+                    sales: "$amount",
                 },
             },
             {
@@ -98,7 +94,6 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
     }   catch (err) {
         res.status(500).json(err);
     }
-    });
-
+});
 
 module.exports = router;

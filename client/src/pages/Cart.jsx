@@ -7,7 +7,8 @@ import Navbar from '../components/Navbar'
 import { mobile } from '../responsive';
 import StripeCheckout from 'react-stripe-checkout';
 import { useEffect, useState } from 'react';
-import {userRequest} from '../requestMethod'
+import { userRequest } from '../requestMethod'
+import {useNavigate} from 'react-router-dom'
 
 const KEY = process.env.REACT_APP_STRIPE
 
@@ -153,8 +154,9 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
-    const cart = useSelector(state => state.cart);
+    const cart = useSelector((state) => state.cart);
     const [stripeToken, setStripeToken] = useState(null);
+    const navigate = useNavigate();
 
     const onToken = (token) => {
         setStripeToken(token)
@@ -162,19 +164,22 @@ const Cart = () => {
 
     useEffect(() => {
         const makeRequest = async () => {
-          try {
-              const res = await userRequest('/checkout/payment', {
-                  tokenId: stripeToken,
-                  amount: cart.total * 100,
-                  
-            })
-          } catch (error) {
-            
-          }
-      }
-  },[stripeToken])
+            try {
+                const res = await userRequest.post("/checkout/payment", {
+                    tokenId: stripeToken.id,
+                    amount: 500,
+                });
+                navigate.push("/success", {
+                    stripeData: res.data,
+                    products: cart,
+                });
+            } catch (error) { }
+        };
+        stripeToken && makeRequest();
+    }, [stripeToken, cart.total, navigate]);
+
   return (
-    <div>
+    
         <Container>
               <Navbar />
               <Announcement />
@@ -231,7 +236,7 @@ const Cart = () => {
                           </SummaryItem>
                           <SummaryItem type="total">
                               <SummaryItemText>Total</SummaryItemText>
-                              <SummaryItemPrice>R$ {cart.total + 10 - 4}</SummaryItemPrice>
+                              <SummaryItemPrice>R$ {cart.total }</SummaryItemPrice>
                           </SummaryItem>
                           {/*Método de checkout da compra no Stripe*/ }
                           <StripeCheckout
@@ -239,7 +244,8 @@ const Cart = () => {
                               image=''
                               billingAddress
                               shippingAddress
-                              description={`O total é de ${cart.total}`}
+                              currency='BRL'
+                              description={`O total é de: ${cart.total}`}
                               amount={cart.total * 100}
                               token={onToken}
                               stripeKey={KEY}
@@ -251,7 +257,7 @@ const Cart = () => {
               </Wrapper>
               <Footer/>
         </Container>
-    </div>
+    
   )
 }
 
