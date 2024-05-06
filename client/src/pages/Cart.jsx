@@ -8,7 +8,7 @@ import { mobile } from '../responsive';
 import StripeCheckout from 'react-stripe-checkout';
 import { useEffect, useState } from 'react';
 import { userRequest } from '../requestMethod'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const KEY = process.env.REACT_APP_STRIPE
 
@@ -159,9 +159,10 @@ const Cart = () => {
     const navigate = useNavigate();
 
     const onToken = (token) => {
-        setStripeToken(token)
+        setStripeToken(token)   
     }
-
+    
+    console.log(stripeToken)
     useEffect(() => {
         const makeRequest = async () => {
             try {
@@ -169,9 +170,9 @@ const Cart = () => {
                     tokenId: stripeToken.id,
                     amount: 500,
                 });
-                navigate.push("/success", {
-                    stripeData: res.data,
-                    products: cart,
+                navigate("/success", {
+                    data: res.data,
+                    // products: cart,
                 });
             } catch (error) { }
         };
@@ -241,7 +242,7 @@ const Cart = () => {
                           {/*Método de checkout da compra no Stripe*/ }
                           <StripeCheckout
                               name='JF MAT CONST'
-                              image ={'https://raw.githubusercontent.com/HUDEVBR/SHOP-ECOMMERCE---MATERIAL-DE-CONSTRU--O/main/client/src/assets/images/ícone.png'}
+                              image ='https://i.ibb.co/MctmZDT/icone.png'
                               billingAddress
                               shippingAddress
                               currency='BRL'

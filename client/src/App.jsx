@@ -18,21 +18,14 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route exact path= '/' element={<Home/>}>
-        </Route>
-        <Route path= '/products/:category' element={<ProductList/>}>
-        </Route>
-        <Route path= '/product/:id' element={<Product/>}>
-        </Route>
-        <Route path= '/cart' element={<Cart/>}>
-        </Route>
-        <Route path= '/success' element={<Success/>}>
-        </Route>
-        <Route path='/login' element={user ? <Navigate to ='/' /> : <Login/>}>
-        </Route>
-        <Route path='/register' element={user ? <Navigate to ='/' /> : <Register/>}>
-        </Route>
-      </Routes>
+        <Route exact path= '/' element={<Home />} />
+          <Route path= '/products/:category' element={<ProductList />} />
+          <Route path= '/product/:id' element={<Product />} />
+          <Route path= '/cart' element={<Cart />} />
+          <Route path= '/success' element={<Success />} />
+          <Route path='/login' element={user ? <Navigate to ='/' /> : <Login/>} />
+          <Route path='/register' element={user ? <Navigate to ='/' /> : <Register/>} />
+        </Routes>
     </Router>
   );
 };

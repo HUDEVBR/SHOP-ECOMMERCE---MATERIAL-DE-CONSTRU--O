@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const KEY =
-    "sk_test_51OdTsKGTY2nJebNQjlHBxYyQNaTENC2rjG9LCKZTnI1ZZkaP1YhZErxYSnsMaJHjPRuvXdiWaYDOtl8GjstRjw7S00Pu4ZB88C"
+    "pk_test_51OdTsKGTY2nJebNQ5uMehiWidLMAMw7A20VNfvaowvYVtME32FaMwj7PtFZjCr98lREEhCAOgMc7UPBjpiWExSi800oMSHhWd3"
 
 const Pay = () => {
     const [stripeToken, setStripeToken] = useState(null)
@@ -17,7 +17,7 @@ const Pay = () => {
         const makeRequest = async () => {
             try {
                 const res = await axios.post(
-                    "http:localhost:5000/api/checkout/payment", {
+                    "https:localhost:5000/api/checkout/payment", {
                     tokenId: stripeToken.id,
                     amount: 2000,
                 }
