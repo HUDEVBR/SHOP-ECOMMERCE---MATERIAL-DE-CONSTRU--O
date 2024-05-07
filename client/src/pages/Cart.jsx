@@ -172,7 +172,6 @@ const Cart = () => {
                 });
                 navigate("/success", {
                     data: res.data,
-                    // products: cart,
                 });
             } catch (error) { }
         };
