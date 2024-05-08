@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import logo from "../assets/images/background_jfmateriais.png"
 import { mobile } from "../responsive";
+import { useState } from "react";
+import { login } from "../redux/apiCalls";
+import {useDispatch, useSelector} from "react-redux"
 
 const Container = styled.div`
     width: 100vw;
@@ -53,6 +56,10 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-bottom: 10px;
+  &:disabled{
+    color: #85bc18  ;
+    cursor: not-allowed;
+  }
 `;
 
 const Link = styled.a`
@@ -62,17 +69,38 @@ const Link = styled.a`
   cursor: pointer;
 `;
 
+const Error = styled.span`
+  color: red;
+`
+
 const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    login(dispatch,{username, password})
+  }
   return (
     <Container>
     <Wrapper>
         <Title>LOGAR</Title>
         <Form>
-            <Input placeholder="Usuário" />
-            <Input placeholder="Senha" />
-          <Button>LOGIN</Button>
+          <Input
+              placeholder="Usuário"
+              onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+              placeholder="Senha"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>
+          { error && <Error>Algo deu errado...</Error>}
           <Link>ESQUECEU SEU SENHA?</Link>
-          <Link>CRIAR NOVA CONTA</Link>
+          <Link>CRIAR NOVA CONTA</Link> 
         </Form>
     </Wrapper>
   </Container>
