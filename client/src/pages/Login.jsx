@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import logo from "../assets/images/background_jfmateriais.png"
-import { mobile } from "../responsive";
-import { useState } from "react";
 import { login } from "../redux/apiCalls";
+import { mobile } from "../responsive";
 import {useDispatch, useSelector} from "react-redux"
+import { useState } from "react";
 
 const Container = styled.div`
     width: 100vw;
@@ -80,9 +80,10 @@ const Login = () => {
   const { isFetching, error } = useSelector((state) => state.user);
 
   const handleClick = (e) => {
-    e.preventDefault()
-    login(dispatch,{username, password})
-  }
+    e.preventDefault();
+    login(dispatch, {username, password})
+  };
+
   return (
     <Container>
     <Wrapper>
@@ -98,7 +99,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
           />
           <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>
-          { error && <Error>Algo deu errado...</Error>}
+          { error && <Error>Algo deu errado ...</Error>}
           <Link>ESQUECEU SEU SENHA?</Link>
           <Link>CRIAR NOVA CONTA</Link> 
         </Form>

@@ -91,8 +91,8 @@ const Navbar = () => {
               <Center><Logo >J F MATERIAIS.</Logo></Center>
               </Link>
               <Right>
-                  <MenuItem>REGISTRAR</MenuItem>
-                  <MenuItem>LOGAR</MenuItem>
+                  <MenuItem to='/register'>REGISTRAR</MenuItem>
+                  <MenuItem to='login'>LOGAR</MenuItem>
                   <Link to='/cart'>
                     <MenuItem>
                         <Badge badgeContent={quantity} color="primary" overlap='rectangular'> <ShoppingCartOutlined/></Badge>
