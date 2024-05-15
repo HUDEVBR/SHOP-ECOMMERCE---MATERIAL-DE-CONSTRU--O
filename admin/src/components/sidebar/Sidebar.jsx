@@ -34,32 +34,32 @@ export default function Sidebar() {
             </li>
             <li className="sidebarListItem">
               <TrendingUp className="sidebarIcon" />
-              Sales
+              Vendas
             </li>
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Quick Menu</h3>
+          <h3 className="sidebarTitle">Menu</h3>
           <ul className="sidebarList">
             <Link to="/users" className="link">
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
-                Users
+                Usuários
               </li>
             </Link>
             <Link to="/products" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
-                Products
+                Produtos
               </li>
             </Link>
             <li className="sidebarListItem">
               <AttachMoney className="sidebarIcon" />
-              Transactions
+              Transações
             </li>
             <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
-              Reports
+              Relatórios
             </li>
           </ul>
         </div>
@@ -68,7 +68,7 @@ export default function Sidebar() {
           <ul className="sidebarList">
             <li className="sidebarListItem">
               <MailOutline className="sidebarIcon" />
-              Mail
+              E-mail
             </li>
             <li className="sidebarListItem">
               <DynamicFeed className="sidebarIcon" />
@@ -76,7 +76,7 @@ export default function Sidebar() {
             </li>
             <li className="sidebarListItem">
               <ChatBubbleOutline className="sidebarIcon" />
-              Messages
+              Mensagens
             </li>
           </ul>
         </div>
@@ -85,7 +85,7 @@ export default function Sidebar() {
           <ul className="sidebarList">
             <li className="sidebarListItem">
               <WorkOutline className="sidebarIcon" />
-              Manage
+              Gerenciar
             </li>
             <li className="sidebarListItem">
               <Timeline className="sidebarIcon" />
@@ -93,7 +93,7 @@ export default function Sidebar() {
             </li>
             <li className="sidebarListItem">
               <Report className="sidebarIcon" />
-              Reports
+              Relatórios
             </li>
           </ul>
         </div>
