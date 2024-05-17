@@ -10,7 +10,7 @@ import {
     PURGE,
     REGISTER,
   } from 'redux-persist'
-  import storage from 'redux-persist/es/storage/session.js'
+  import storage from 'redux-persist/es/storage'
 
   const persistConfig = {
     key: 'root',
@@ -18,9 +18,9 @@ import {
     storage,
 }
   
-// const rootReducer = combineReducers({user: userReducer, cart: cartReducer})
+const rootReducer = combineReducers({user: userReducer})
   
-  const persistedReducer = persistReducer(persistConfig, userReducer)
+  const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
     reducer: persistedReducer,
