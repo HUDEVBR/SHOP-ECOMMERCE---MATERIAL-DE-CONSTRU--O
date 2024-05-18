@@ -10,7 +10,7 @@ import {
     PURGE,
     REGISTER,
   } from 'redux-persist'
-  import storage from 'redux-persist/es/storage'
+  import storage from 'redux-persist/es/storage/session.js'
 
   const persistConfig = {
     key: 'root',

@@ -12,7 +12,7 @@ import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login"
 
 function App() {
-  // const admin = JSON.parse(JSON.parse(sessionStorage.getItem("persist:root")).user).currentUser.accessToken
+  // const admin = localStorage.getItem("persist:root")?.user ?JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user).currentUser.accessToken : null;
   return (
     <Router>
       <Switch>

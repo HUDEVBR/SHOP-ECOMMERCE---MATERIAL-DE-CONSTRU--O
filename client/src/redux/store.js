@@ -11,7 +11,7 @@ import {
     PURGE,
     REGISTER,
   } from 'redux-persist'
-  import storage from 'redux-persist/lib/storage/session.js'
+  import storage from 'redux-persist/es/storage/session.js'
 import userRedux from "./userRedux.js";
 
   const persistConfig = {
