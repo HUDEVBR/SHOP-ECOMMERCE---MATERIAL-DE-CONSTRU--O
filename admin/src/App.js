@@ -2,7 +2,11 @@ import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import "./App.css";
 import Home from "./pages/home/Home";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
@@ -12,18 +16,17 @@ import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login"
 
 function App() {
-  // const admin = localStorage.getItem("persist:root")?.user ?JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user).currentUser.accessToken : null;
+  const admin = JSON.parse(sessionStorage.getItem("persist:root"))?.user;
   return (
     <Router>
       <Switch>
       <Route path="/login">
             <Login />
           </Route>
-        {
-          // admin && (
+        {admin && (
           <>
-                <Topbar />
-          <div className="container">
+              <Topbar />
+              <div className="container">
                 <Sidebar />
               <Route exact path="/">
                 <Home />
@@ -48,8 +51,7 @@ function App() {
               </Route>
           </div>
         </>
-        // )
-        }
+        )}
         </Switch>
     </Router>
   );
