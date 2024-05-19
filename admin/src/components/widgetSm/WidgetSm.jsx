@@ -21,17 +21,16 @@ export default function WidgetSm() {
     <div className="widgetSm">
       <span className="widgetSmTitle">New Join Members</span>
       <ul className="widgetSmList">
-        {users.map(user => (
+        {users.map((user) => (
           
-          <li className="widgetSmListItem">
+          <li className="widgetSmListItem" key={user._id}>
           <img
-            src={users.img || 'https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png'}
+            src={user.img || 'https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png'}
             alt=""
             className="widgetSmImg"
             />
           <div className="widgetSmUser">
-            <span className="widgetSmUsername"></span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
+              <span className="widgetSmUsername">{user.username}</span>
           </div>
           <button className="widgetSmButton">
             <Visibility className="widgetSmIcon" />

@@ -12,7 +12,6 @@ import {
     REGISTER,
   } from 'redux-persist'
   import storage from 'redux-persist/es/storage/session.js'
-import userRedux from "./userRedux.js";
 
   const persistConfig = {
     key: 'root',
