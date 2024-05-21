@@ -1,6 +1,30 @@
 import { useEffect, useState } from "react";
-import "./widgetLg.css";
 import { userRequest } from "../../requestMethods";
+import "./widgetLg.css";
+import { format, register } from "timeago.js"
+const localeFunc = (number, index) => {
+  // number: the timeago / timein number;
+  // index: the index of array below;
+  // totalSec: total seconds between date to be formatted and today's date;
+  return [
+    ['agora mesmo', 'agora'],
+    ['há %s segundos', 'em %s segundos'],
+    ['há um minuto', 'em um minuto'],
+    ['há %s minutos', 'em %s minutos'],
+    ['há uma hora', 'em uma hora'],
+    ['há %s horas', 'em %s horas'],
+    ['há um dia', 'em um dia'],
+    ['há %s dias', 'em %s dias'],
+    ['há uma semana', 'em uma semana'],
+    ['há %s semanas', 'em %s semanas'],
+    ['há um mês', 'em um mês'],
+    ['há %s meses', 'em %s meses'],
+    ['há um ano', 'em um ano'],
+    ['há %s anos', 'em %s anos'],
+  ][index];
+};
+// register your locale with timeago
+register('pt_BR', localeFunc);
 
 export default function WidgetLg() {
   const [orders, setOrders] = useState([]);
@@ -39,9 +63,9 @@ export default function WidgetLg() {
               className="widgetLgImg"
               /> */}
             <span className="widgetLgName">{order.userId}</span>
-          </td>
-          <td className="widgetLgDate">02 Jun 2024</td>
-          <td className="widgetLgAmount">R$ 122.00</td>
+            </td>  
+          <td className="widgetLgDate">{format(order.createdAt, 'pt_BR')}</td>
+            <td className="widgetLgAmount">R$ {order.amount}</td>
           <td className="widgetLgStatus">
             <Button type={order.status} />
           </td>
