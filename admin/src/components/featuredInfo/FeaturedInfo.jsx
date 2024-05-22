@@ -1,25 +1,53 @@
 import "./featuredInfo.css";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
+import { useEffect, useState } from "react";
+import { userRequest } from "../../requestMethods";
 
 export default function FeaturedInfo() {
+  const [income, setIncome] = useState([])
+  const [perc, setPerc] = useState(0)
+
+  useEffect(() => {
+    const getIncome = async () => {
+      try {
+        const res = await userRequest.get('orders/income');
+        setIncome(res.data)
+        setPerc((res.data[1].total * 100) / res.data[0].total - 100);
+      } catch (e) {}
+    };
+    getIncome();
+  }, []);
+
+console.log(perc)
   return (
     <div className="featured">
       <div className="featuredItem">
-        <span className="featuredTitle">Receita Bruta</span>
+        <span className="featuredTitle">Receita Bruta Último mês</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">R$ 2,415</span>
+          <span className="featuredMoney">R$ {income[1]?.total}</span>
           <span className="featuredMoneyRate">
-            -11.4 <ArrowDownward  className="featuredIcon negative"/>
+            % {Math.floor(perc)}
+            {perc < 0 ? (
+              <ArrowDownward className="featuredIcon negative" />
+            ) : (
+              <ArrowUpward className="featuredIcon" />
+            )}
           </span>
         </div>
         <span className="featuredSub">Comparado ao último mês</span>
       </div>
       <div className="featuredItem">
-        <span className="featuredTitle">Vendas</span>
+        <span className="featuredTitle">Vendas Mês Corrente
+        </span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">R$ 4,415</span>
+          <span className="featuredMoney">R$ {income[0]?.total}</span>
           <span className="featuredMoneyRate">
-            -1.4 <ArrowDownward className="featuredIcon negative"/>
+          % {Math.floor(perc)}
+            {perc < 0 ? (
+              <ArrowDownward className="featuredIcon negative" />
+            ) : (
+              <ArrowUpward className="featuredIcon" />
+            )}
           </span>
         </div>
         <span className="featuredSub">Comparado ao último mês</span>
