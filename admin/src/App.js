@@ -4,7 +4,7 @@ import "./App.css";
 import Home from "./pages/home/Home";
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route
 } from "react-router-dom";
 import UserList from "./pages/userList/UserList";
@@ -19,40 +19,24 @@ function App() {
   const admin = JSON.parse(sessionStorage.getItem("persist:root"))?.user;
   return (
     <Router>
-      <Switch>
-      <Route path="/login">
-            <Login />
-          </Route>
+      <Routes>
+      <Route path="/login" element={<Login />} />
         {admin && (
           <>
-              <Topbar />
-              <div className="container">
-                <Sidebar />
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/users">
-                <UserList />
-              </Route>
-              <Route path="/user/:userId">
-                <User />
-              </Route>
-              <Route path="/newUser">
-                <NewUser />
-              </Route>
-              <Route path="/products">
-                <ProductList />
-              </Route>
-              <Route path="/product/:productId">
-                <Product />
-              </Route>
-              <Route path="/newproduct">
-                <NewProduct />
-              </Route>
+              <Route element={<Topbar />} />
+          <div className="container">
+              <Route element={<Sidebar />} />
+              <Route exact path="/" element={<Home />} />
+              <Route path="/users" element={<UserList />} />
+              <Route path="/user/:userId" element={<User />} />
+              <Route path="/newUser" element={<NewUser />} />
+              <Route path="/products" element={<ProductList />} />
+              <Route path="/product/:productId" element={<Product />} />
+              <Route path="/newproduct" element={<NewProduct />} />
           </div>
         </>
         )}
-        </Switch>
+        </Routes>
     </Router>
   );
 }
