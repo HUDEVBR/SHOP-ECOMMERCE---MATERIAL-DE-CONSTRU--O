@@ -5,7 +5,9 @@ import Home from "./pages/home/Home";
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Outlet,
+  Navigate
 } from "react-router-dom";
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
@@ -15,27 +17,45 @@ import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login"
 
-function App() {
+
+const Layout = () => (
+  <>
+    <Topbar />
+    <div className="container">
+      <Sidebar />
+      <Outlet />
+    </div>
+  </>
+);
+
+export const PrivateRoute = () => {
   const admin = JSON.parse(sessionStorage.getItem("persist:root"))?.user;
+
+  if (!admin) {
+    return <Navigate to="/login" replace />;
+  }
+  return <Outlet />;
+};
+
+function App() {
+  
   return (
     <Router>
       <Routes>
-      <Route path="/login" element={<Login />} />
-        {admin && (
           <>
-              <Route element={<Topbar />} />
-          <div className="container">
-              <Route element={<Sidebar />} />
+            <Route path="/login" element={<Login />} />
+            <Route element={<Layout />}>
               <Route exact path="/" element={<Home />} />
               <Route path="/users" element={<UserList />} />
               <Route path="/user/:userId" element={<User />} />
               <Route path="/newUser" element={<NewUser />} />
               <Route path="/products" element={<ProductList />} />
               <Route path="/product/:productId" element={<Product />} />
-              <Route path="/newproduct" element={<NewProduct />} />
-          </div>
+            <Route path="/newproduct" element={<NewProduct />} />
+            
+            
+            </Route>
         </>
-        )}
         </Routes>
     </Router>
   );

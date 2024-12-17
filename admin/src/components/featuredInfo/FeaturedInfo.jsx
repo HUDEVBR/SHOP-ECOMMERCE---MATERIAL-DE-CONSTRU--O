@@ -18,7 +18,7 @@ export default function FeaturedInfo() {
     getIncome();
   }, []);
 
-console.log(perc)
+console.log(income)
   return (
     <div className="featured">
       <div className="featuredItem">
@@ -26,7 +26,7 @@ console.log(perc)
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">R$ {income[1]?.total}</span>
           <span className="featuredMoneyRate">
-            % {Math.floor(perc)}
+            %{Math.floor(perc)}
             {perc < 0 ? (
               <ArrowDownward className="featuredIcon negative" />
             ) : (

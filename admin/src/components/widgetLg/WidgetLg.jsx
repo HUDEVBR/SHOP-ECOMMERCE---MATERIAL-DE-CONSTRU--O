@@ -53,7 +53,7 @@ export default function WidgetLg() {
           <th className="widgetLgTh">Quantidade</th>
           <th className="widgetLgTh">Status</th>
         </tr>
-        {orders.map((order) => ( 
+        {orders.map(order => ( 
           
           <tr className="widgetLgTr" key={order._id}>
             <td className="widgetLgUser">

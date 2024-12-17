@@ -46,7 +46,7 @@ export const categories = [
 export const popularProducts = [
     {
         id: 1,
-        img: "/images/3m_duplaface_fita_01.png",
+        img: "uploads/1734447929837-3m_duplaface_fita_01.png",
     },
     {
         id: 2,

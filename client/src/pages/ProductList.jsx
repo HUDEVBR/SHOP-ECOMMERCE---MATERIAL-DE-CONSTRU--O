@@ -71,6 +71,7 @@ const ProductList = () => {
                       <Option>Chuveiros</Option>
                       <Option>Cadeados</Option>
                       <Option>Disjuntores</Option> 
+                      <Option>Fitas</Option>
                       <Option>Lâmpadas</Option>
                   </Select>
                   <Select name = 'marca' onChange={handleFilters}>

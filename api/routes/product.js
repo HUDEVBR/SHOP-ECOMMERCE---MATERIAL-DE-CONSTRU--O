@@ -6,19 +6,28 @@ const {
 } = require("./verifyToken");
 
 const router = require("express").Router();
+const upload = require('../config/multerConfig'); // Import the multer config
+
 
 //CREATE - Função para cadastrar produtos
 
-router.post("/", verifyTokenAndAdmin, async (req, res) => {
-    const newProduct = new Product(req.body);
-
+router.post('/', verifyTokenAndAdmin, upload.single('img'), async (req, res) => {
+    // Ensure the img field is set correctly in the request body
+    const newProduct = new Product({
+      ...req.body,
+      img: `/uploads/${req.file.filename}`, // Assign the file path to the img field
+    });
+    
+    
     try {
-        const savedProduct = await newProduct.save();
-        res.status(200).json(savedProduct);
+        console.log(req.file);
+        console.log(req.body);
+      const savedProduct = await newProduct.save();
+      res.status(200).json(savedProduct);
     } catch (err) {
         res.status(500).json(err);
     }
-});
+  });
 
 //UPDATE - Função para atualizar produtos
 
