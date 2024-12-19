@@ -36,7 +36,7 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     }
 });
 
-//DELETE - Função para deletar produtos
+//DELETE - Função para deletar produtos do carrinho
 router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
         await Cart.findByIdAndDelete(req.params.id);

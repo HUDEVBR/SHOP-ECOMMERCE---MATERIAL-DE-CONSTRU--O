@@ -44,7 +44,7 @@ const Option = styled.option`
 
 const ProductList = () => {
     const location = useLocation();
-    const cat = location.pathname.split('/')[2]
+    const cat = location.pathname.split('/')[2] || '';
     const [filters, setFilters] = useState({})
     const [sort, setSort] = useState('recentes')
 
@@ -90,7 +90,7 @@ const ProductList = () => {
               </Filter>
               <Filter>
                   <FilterText>Organizar Produtos:</FilterText>
-                  <Select onChange={e => setSort(e.target.value)}>
+                  <Select onChange={(e) => setSort(e.target.value)}>
                       <Option value='newest'>Recentes</Option>
                       <Option value='cresc'>Preço (cresc)</Option>
                       <Option value='decr'>Preço (decr)</Option>

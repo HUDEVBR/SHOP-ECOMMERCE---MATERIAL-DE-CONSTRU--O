@@ -24,8 +24,8 @@ const ImgContainer = styled.div`
 `;
 
 const Image = styled.img`
-    width: 100%;
-    height: 90vh;
+    width: 75%;
+    height: 75%;
     object-fit: cover;
     ${mobile({width: "70%", height: "30vh"})}
 `;
@@ -164,7 +164,7 @@ const Product = () => {
         //atualizar o carrinho
         dispatch(
             addProduct({ ...product, quantity, brand }));
-        };
+    };
 
   return (
       <Container>
@@ -172,7 +172,7 @@ const Product = () => {
           <Announcement />
           <Wrapper>
               <ImgContainer>
-                  <Image src={product.img} />
+                  <Image src={`http://localhost:5000${product.img}`} />
               </ImgContainer>
               <InfoContainer>
                   <Title>{product.title}</Title>
@@ -185,30 +185,8 @@ const Product = () => {
                               {product.brand?.map((m) => (
                                   <FilterBrand key={m}>{ m}</FilterBrand>
                               ))}
-                                    {/* <FilterBrand value="0">3M</FilterBrand>
-                                    <FilterBrand value="1">G.E. General Eletrics</FilterBrand>
-                                    <FilterBrand value="2">Cobrecon</FilterBrand>
-                                    <FilterBrand value="3">Lorenzetti</FilterBrand>
-                                    <FilterBrand value="4">Lumifacil</FilterBrand>
-                                    <FilterBrand value="5">Megatron</FilterBrand>
-                                    <FilterBrand value="6">Papaiz</FilterBrand>
-                                    <FilterBrand value="7">Starret</FilterBrand>
-                                    <FilterBrand value="8">Taschibra</FilterBrand>
-                                    <FilterBrand value="9">Imperial</FilterBrand> */}
                                 </FilterBrandTypes>
                   </Filter>
-                  {/* <Filter>
-                      <FilterTitle >Preços:</FilterTitle>    
-                          <FilterValues>
-                              {product?.value?.map((v) => (
-                                  <FilterPrice key={v}>{v}</FilterPrice>
-                              ))}
-                            <FilterPrice>R$ 0,00 Até R$ 50</FilterPrice>
-                            <FilterPrice>De R$ 51 Até R$ 100</FilterPrice>
-                            <FilterPrice>De R$ 101 Até R$ 200</FilterPrice>
-                            <FilterPrice>Mais de R$ 201</FilterPrice>
-                        </FilterValues>
-                  </Filter> */}
                   </FilterContainer>
                   <AddContainer>
                       <AmountContainer>

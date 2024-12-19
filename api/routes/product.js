@@ -1,3 +1,5 @@
+const express = require('express');
+const path = require('path');
 const Product = require("../models/Product");
 const {
     verifyToken,
@@ -8,6 +10,8 @@ const {
 const router = require("express").Router();
 const upload = require('../config/multerConfig'); // Import the multer config
 
+
+router.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 //CREATE - Função para cadastrar produtos
 
@@ -20,8 +24,7 @@ router.post('/', verifyTokenAndAdmin, upload.single('img'), async (req, res) => 
     
     
     try {
-        console.log(req.file);
-        console.log(req.body);
+      console.log(req.file);
       const savedProduct = await newProduct.save();
       res.status(200).json(savedProduct);
     } catch (err) {

@@ -64,11 +64,17 @@ const Icon = styled.div`
   }
 `;
 
-const Product = ({item}) => {
+const Product = ({ item }) => {
+  const imageUrl = `http://localhost:5000${item.img}`;
+    console.log('Image URL:', imageUrl);
+
+
+  console.log(item.img)
   return (
       <Container>
-          <Circle />
-          <Image src={item.img} />
+      <Circle />
+      
+          <Image src={imageUrl} alt={item.name} />
           <Info>
               <Icon>     
                 <ShoppingCartOutlined/>

@@ -45,23 +45,23 @@ export const categories = [
 
 export const popularProducts = [
     {
-        id: 1,
-        img: "uploads/1734447929837-3m_duplaface_fita_01.png",
+        _id: 1,
+        img: "images/3m_duplaface_fita_01.png",
     },
     {
-        id: 2,
+        _id: 2,
         img: "/images/3m_fita_alta_tensao_01.png",
     },
     {
-        id: 3,
+        _id: 3,
         img: "/images/3m_fita_fixa_forte_01.png",
     },
     {
-        id: 4,
+        _id: 4,
         img: "/images/3m_fita_isolante_01.png",
     },
     {
-        id: 5,
+        _id: 5,
         img: "/images/3m_fita_isolante_02.png",
     },
     {
