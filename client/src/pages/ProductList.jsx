@@ -72,7 +72,7 @@ const ProductList = () => {
                       <Option>Cadeados</Option>
                       <Option>Disjuntores</Option> 
                       <Option>Fitas</Option>
-                      <Option>Lâmpadas</Option>
+                      <Option>Lampadas</Option>
                   </Select>
                   <Select name = 'marca' onChange={handleFilters}>
                       <Option disabled>
