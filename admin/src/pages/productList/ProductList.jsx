@@ -24,7 +24,7 @@ export default function ProductList() {
     {
       field: "product",
       headerName: "Product",
-      width: 150,
+      width: 250,
       renderCell: (params) => {
         return (
           <div className="productListItem">
@@ -34,11 +34,11 @@ export default function ProductList() {
         );
       },
     },
-    { field: "inStock", headerName: "Stock", width:  120 },
+    {field: "inStock", headerName: "Stock", width:  80},
     {
       field: "price",
       headerName: "Price",
-      width: 160,
+      width: 120,
     },
     {
       field: "action",
@@ -67,7 +67,7 @@ export default function ProductList() {
         disableSelectionOnClick
         columns={columns}
         getRowId={(row) => row._id}
-        pageSize={100}
+        pageSize={6}
         checkboxSelection
       />
     </div>

@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/static/js/main.f63008ad.js",
+    "static/media/background_jfmateriais.png": "/static/media/background_jfmateriais.c6b3d4d1f6f8f55fe800.png",
+    "index.html": "/index.html",
+    "main.f63008ad.js.map": "/static/js/main.f63008ad.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.f63008ad.js"
+  ]
+}
